@@ -1,0 +1,217 @@
+/* ==========================================================================
+   Atalaya docs — CLI / terminal theme, orange accent
+   ========================================================================== */
+
+:root {
+  --cli-orange: #ff8c00;
+  --cli-orange-bright: #ffa733;
+  --cli-orange-deep: #e65100;
+  --cli-bg: #0d1117;
+  --cli-surface: #161b22;
+  --cli-border: #30363d;
+  --cli-muted: #8b949e;
+}
+
+/* --------------------------------------------------------------------------
+   Palette — light scheme (terminal-style header, orange accent)
+   -------------------------------------------------------------------------- */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #1c2128;
+  --md-primary-fg-color--light: #2b323b;
+  --md-primary-fg-color--dark: #0d1117;
+  --md-accent-fg-color: #ff6d00;
+  --md-typeset-a-color: var(--cli-orange-deep);
+}
+
+/* --------------------------------------------------------------------------
+   Palette — dark scheme
+   -------------------------------------------------------------------------- */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--cli-surface);
+  --md-primary-fg-color--light: #2b323b;
+  --md-primary-fg-color--dark: var(--cli-bg);
+  --md-accent-fg-color: var(--cli-orange-bright);
+  --md-typeset-a-color: var(--cli-orange-bright);
+  --md-default-bg-color: var(--cli-bg);
+}
+
+/* --------------------------------------------------------------------------
+   Code — terminal palette in both schemes (dark blocks even on light pages)
+   -------------------------------------------------------------------------- */
+[data-md-color-scheme="default"],
+[data-md-color-scheme="slate"] {
+  --md-code-bg-color: var(--cli-bg);
+  --md-code-fg-color: #e6edf3;
+  --md-code-hl-color: rgba(255, 140, 0, 0.12);
+  --md-code-hl-number-color: #79c0ff;
+  --md-code-hl-special-color: #f2cc60;
+  --md-code-hl-function-color: #d2a8ff;
+  --md-code-hl-constant-color: #79c0ff;
+  --md-code-hl-keyword-color: #ff7b72;
+  --md-code-hl-string-color: #7ee787;
+  --md-code-hl-name-color: #e6edf3;
+  --md-code-hl-operator-color: var(--cli-muted);
+  --md-code-hl-punctuation-color: var(--cli-muted);
+  --md-code-hl-comment-color: var(--cli-muted);
+  --md-code-hl-generic-color: #e6edf3;
+  --md-code-hl-variable-color: #ffa657;
+  --md-footer-bg-color: var(--cli-surface);
+  --md-footer-bg-color--dark: var(--cli-bg);
+}
+
+/* --------------------------------------------------------------------------
+   Header — terminal title bar
+   -------------------------------------------------------------------------- */
+.md-header {
+  border-bottom: 1px solid var(--cli-orange);
+}
+
+/* --------------------------------------------------------------------------
+   Headings — shell prompts
+   -------------------------------------------------------------------------- */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  font-weight: 700;
+}
+
+.md-typeset h2 {
+  padding-bottom: 0.3em;
+  border-bottom: 1px dashed color-mix(in srgb, currentColor 30%, transparent);
+}
+
+.md-typeset h2::before {
+  content: "> ";
+  color: var(--cli-orange);
+}
+
+.md-typeset h3::before {
+  content: ">> ";
+  color: var(--cli-orange);
+  opacity: 0.7;
+}
+
+/* --------------------------------------------------------------------------
+   Code blocks — terminal window with traffic lights
+   -------------------------------------------------------------------------- */
+.md-typeset div.highlight {
+  border: 1px solid var(--cli-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.md-typeset div.highlight::before {
+  content: "";
+  display: block;
+  height: 28px;
+  border-bottom: 1px solid var(--cli-border);
+  background-color: var(--cli-surface);
+  background-image:
+    radial-gradient(circle at 16px 14px, #ff5f56 5px, transparent 6px),
+    radial-gradient(circle at 36px 14px, #ffbd2e 5px, transparent 6px),
+    radial-gradient(circle at 56px 14px, #27c93f 5px, transparent 6px);
+}
+
+.md-typeset div.highlight pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.md-typeset div.highlight span.filename {
+  border-bottom: 1px solid var(--cli-border);
+  background-color: var(--cli-surface);
+  color: var(--cli-muted);
+}
+
+/* Inline code — terminal chips */
+.md-typeset code {
+  border: 1px solid var(--cli-border);
+  border-radius: 4px;
+}
+
+.md-typeset pre code {
+  border: none;
+  border-radius: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Navigation — file-tree feel
+   -------------------------------------------------------------------------- */
+.md-nav__title {
+  color: var(--cli-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.md-nav__item--section > .md-nav__link {
+  color: var(--cli-orange);
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+}
+
+.md-nav__link--active {
+  font-weight: 700;
+}
+
+.md-nav--primary .md-nav__link--active::before {
+  content: "> ";
+  color: var(--cli-orange);
+}
+
+/* --------------------------------------------------------------------------
+   Typography details
+   -------------------------------------------------------------------------- */
+::selection {
+  background: rgba(255, 140, 0, 0.35);
+}
+
+.md-typeset hr {
+  border-bottom: 1px dashed var(--cli-orange);
+}
+
+.md-typeset blockquote {
+  border-left: 2px solid var(--cli-orange);
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--cli-border);
+  font-size: 0.68rem;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--cli-surface);
+  color: #e6edf3;
+}
+
+/* --------------------------------------------------------------------------
+   Admonitions — note in accent orange
+   -------------------------------------------------------------------------- */
+.md-typeset .admonition,
+.md-typeset details {
+  border-width: 1px;
+  border-radius: 6px;
+}
+
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-color: var(--cli-orange);
+}
+
+.md-typeset .note > .admonition-title,
+.md-typeset .note > summary {
+  background-color: rgba(255, 140, 0, 0.1);
+}
+
+.md-typeset .note > .admonition-title::before,
+.md-typeset .note > summary::before {
+  background-color: var(--cli-orange);
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.md-footer {
+  border-top: 1px solid var(--cli-orange);
+}
