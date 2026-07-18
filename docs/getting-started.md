@@ -58,8 +58,3 @@ If you have a domain registered in Cloudflare, add a route block to `wrangler.to
 pattern = "status.yourdomain.com"
 custom_domain = true
 ```
-
-## Quick health check
-
-Once deployed, your Worker is reachable at the route you configured or the default
-`workers.dev` subdomain. The JSON API lives at `/api/status`.
