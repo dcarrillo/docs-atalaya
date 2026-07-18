@@ -1,5 +1,5 @@
 site_name: Atalaya
-site_url: https://dcarrillo.github.io/atalaya/
+site_url: https://atalaya-docs.dcarrillo.es
 site_description: Self-hosted uptime monitoring on Cloudflare Workers
 repo_url: https://github.com/dcarrillo/atalaya
 repo_name: dcarrillo/atalaya

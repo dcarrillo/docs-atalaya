@@ -2,7 +2,7 @@
 
 Documentation for [Atalaya](https://github.com/dcarrillo/atalaya), a self-hosted uptime monitoring tool that runs on Cloudflare Workers.
 
-The published site is at https://dcarrillo.github.io/atalaya-docs/.
+The published site is at https://atalaya-docs.dcarrillo.es
 
 Built with [MkDocs](https://www.mkdocs.org/) and the [Material](https://squidfunk.github.io/mkdocs-material/) theme. Deployed to GitHub Pages through the workflow in `.github/workflows/deploy.yml` on every push to `main`.
 
