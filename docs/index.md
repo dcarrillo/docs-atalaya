@@ -48,3 +48,51 @@ non-public routes, and serves the status page through Astro SSR. Regional checks
 to Durable Objects so they run from a specific Cloudflare edge location.
 
 The status page accesses D1 directly. No service binding needed since everything lives in the same Worker.
+
+```mermaid
+flowchart TB
+    subgraph external[" "]
+        browser["Browser"]
+        webhook["Webhook<br/>(ntfy, Slack, etc.)"]
+        targets["Monitored Targets<br/>(HTTP / TCP / DNS)"]
+    end
+
+    subgraph cf["Cloudflare"]
+        subgraph worker["Worker (index.ts)"]
+            fetch["fetch handler"]
+            scheduled["scheduled handler"]
+            auth["Basic Auth<br/>check"]
+            astro["Astro SSR<br/>status-page/"]
+            local["Local Checks<br/>(HTTP / TCP / DNS)"]
+            alerts["Alert Engine"]
+        end
+
+        do["Durable Object<br/>RegionalChecker<br/>(pinned to edge region)"]:::do
+        d1[("D1<br/>(SQLite)")]:::db
+        assets["Static Assets<br/>(CSS, JS, favicon)"]:::static
+        cron["Cron Triggers<br/>* * * * * (checks)<br/>0 * * * * (aggregation)"]:::trigger
+    end
+
+    browser -->|"HTTP request"| fetch
+    fetch --> auth
+    auth -->|"public / auth OK"| assets
+    auth -->|"page route"| astro
+    astro -->|"reads"| d1
+
+    cron -->|"every minute"| scheduled
+    cron -->|"every hour"| scheduled
+    scheduled -->|"parse config"| local
+    scheduled -->|"regional monitor"| do
+    do -->|"run from edge"| targets
+    local -->|"run locally"| targets
+    local -->|"write results"| d1
+    do -->|"write results"| d1
+    local --> alerts
+    do --> alerts
+    alerts -->|"POST webhook"| webhook
+
+    classDef do fill:#f6821f33,stroke:#f6821f,stroke-width:2px
+    classDef db fill:#00a4fb33,stroke:#00a4fb,stroke-width:2px
+    classDef static fill:#6b46fe33,stroke:#6b46fe,stroke-width:2px
+    classDef trigger fill:#2ecc7133,stroke:#2ecc71,stroke-width:2px
+```
